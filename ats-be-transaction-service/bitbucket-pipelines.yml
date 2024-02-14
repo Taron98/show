@@ -1,0 +1,39 @@
+# @format
+options:
+  docker: true
+  size: 2x
+
+pipelines:
+  branches:
+    master:
+      - step:
+          size: 2x
+          name: Build and AWS Setup
+          services:
+            - docker
+          script:
+            # change directory to application folder
+            - ls
+            # builds docker image from a local dockerfile
+            - docker build -t $SERVICE_NAME ./
+            # tags image as a way to id it by the timestamp
+            - docker tag $SERVICE_NAME:latest $AWS_ECR_REGISTRY/$SERVICE_NAME:v1.0.0
+            # use pipe to push the image to AWS ECR
+            - pipe: atlassian/aws-ecr-push-image:1.5.0
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_REGION
+                IMAGE_NAME: $SERVICE_NAME
+                TAGS: 'v1.0.0'
+      - step:
+          name: Deploy to ECS
+          script:
+            - pipe: atlassian/aws-ecs-deploy:1.6.1
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_REGION
+                CLUSTER_NAME: 'ats-dev-ECSCluster-PrrmjyR2P2ID'
+                SERVICE_NAME: $SERVICE_NAME
+                FORCE_NEW_DEPLOYMENT: 'true'

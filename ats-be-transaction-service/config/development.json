@@ -1,0 +1,70 @@
+{
+  "mongo": {
+    "username": "",
+    "password": "",
+    "host": "",
+    "port": 27017,
+    "db": "ats"
+  },
+  "aws": {
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "region": "",
+    "bucket": "ats-dev-documents"
+  },
+  "jwt": {
+    "secret": ""
+  },
+  "kafka": {
+    "clientId": "",
+    "bootstrapBrokerURLS": "localhost:29092"
+  },
+  "winston": {
+    "logLevel": "info",
+    "cloudWatch": {
+      "group": "ats-dev-services",
+      "stream": "transaction-service",
+      "accessKeyId": "",
+      "secretAccessKey": "",
+      "region": ""
+    }
+  },
+  "services": {
+    "accountService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "transactionService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "rateService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "obligoService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "documentService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "agentService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "customerService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "complianceService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    },
+    "integrationService": {
+      "url": "https://dev-api.atservices.network/api",
+      "apiKey": ""
+    }
+  }
+}

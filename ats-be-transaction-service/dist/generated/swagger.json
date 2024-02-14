@@ -1,0 +1,2027 @@
+{
+    "components": {
+        "examples": {},
+        "headers": {},
+        "parameters": {},
+        "requestBodies": {},
+        "responses": {},
+        "schemas": {
+            "CountryResponse": {
+                "properties": {
+                    "phoneCode": {
+                        "type": "string"
+                    },
+                    "ISOCode2": {
+                        "type": "string"
+                    },
+                    "ISOCode": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "phoneCode",
+                    "ISOCode2",
+                    "ISOCode",
+                    "currency",
+                    "name",
+                    "_id"
+                ],
+                "type": "object"
+            },
+            "DeliverVia": {
+                "properties": {
+                    "shortCode": {
+                        "type": "string"
+                    },
+                    "transferType": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CountryResponse"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "shortCode",
+                    "transferType",
+                    "country",
+                    "name"
+                ],
+                "type": "object"
+            },
+            "ReportData": {
+                "properties": {
+                    "atsCommission": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "agentCommission": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "currencyProfit": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "buyRate": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "atsCommission",
+                    "agentCommission",
+                    "currencyProfit"
+                ],
+                "type": "object"
+            },
+            "TransactionStatus": {
+                "type": "string",
+                "enum": [
+                    "ALL",
+                    "ABORTED",
+                    "CHECK_DOCUMENT",
+                    "CONFIRMED",
+                    "FAILED",
+                    "FOR_VERIFICATION",
+                    "PENDING",
+                    "POSTED",
+                    "REQUEST_CANCEL",
+                    "REQUEST_CHANGE",
+                    "WAIT",
+                    "WAIT_FOR_PROCESS_OBLIGO",
+                    "WAIT_FOR_PROCESS_COMPLIANCE",
+                    "UNPROCESSED"
+                ]
+            },
+            "SenderData": {
+                "properties": {
+                    "dateOfBirth": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "idExpDate": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "idNumber": {
+                        "type": "string"
+                    },
+                    "idType": {
+                        "type": "string"
+                    },
+                    "nationality": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "sender": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "dateOfBirth",
+                    "phoneNumber",
+                    "idExpDate",
+                    "idNumber",
+                    "idType",
+                    "nationality",
+                    "address",
+                    "city",
+                    "fullName",
+                    "sender"
+                ],
+                "type": "object"
+            },
+            "ReceiverData": {
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "idNumber": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "receiver": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "city",
+                    "phone",
+                    "address",
+                    "idNumber",
+                    "fullName",
+                    "receiver"
+                ],
+                "type": "object"
+            },
+            "BankInfo": {
+                "properties": {
+                    "IFSC": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "accountNumber": {
+                        "type": "string"
+                    },
+                    "bankBranch": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "bankName": {
+                        "type": "string"
+                    },
+                    "bank": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "accountNumber",
+                    "bank"
+                ],
+                "type": "object"
+            },
+            "TransactionPurpose": {
+                "type": "string",
+                "enum": [
+                    "SUPPORT_OR_GIFT",
+                    "PAYMENT_PERFORMED_FOREIGN_RESIDENT",
+                    "OVERALL_TRANSFER",
+                    "AGGREGATE_TRANSFER",
+                    "DEPOSIT_MY_BANK_ACCOUNT",
+                    "DEPOSIT_OTHERS_BANK_ACCOUNT",
+                    "TRANSFER_TO_NOT_RELATIVE"
+                ]
+            },
+            "ClientInfo": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "AGENT",
+                            "PARTNER"
+                        ]
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "fullName",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "BranchInfo": {
+                "properties": {
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "fullName",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "UserInfo": {
+                "properties": {
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "fullName",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "TransactionResponse": {
+                "properties": {
+                    "updatedAt": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "deliverViaName": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserInfo"
+                    },
+                    "branch": {
+                        "$ref": "#/components/schemas/BranchInfo"
+                    },
+                    "agent": {
+                        "$ref": "#/components/schemas/ClientInfo"
+                    },
+                    "refNumber": {
+                        "type": "string"
+                    },
+                    "purpose": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TransactionPurpose"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "bankInfo": {
+                        "$ref": "#/components/schemas/BankInfo"
+                    },
+                    "receiverData": {
+                        "$ref": "#/components/schemas/ReceiverData"
+                    },
+                    "senderData": {
+                        "$ref": "#/components/schemas/SenderData"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/TransactionStatus"
+                    },
+                    "fee": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "rate": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "reportData": {
+                        "$ref": "#/components/schemas/ReportData"
+                    },
+                    "receivingCurrency": {
+                        "type": "string"
+                    },
+                    "sendingCurrency": {
+                        "type": "string"
+                    },
+                    "receivingAmount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "reason": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "deliverVia": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DeliverVia"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "transferType": {
+                        "type": "string",
+                        "enum": [
+                            "PICKUP",
+                            "DEPOSIT"
+                        ]
+                    },
+                    "receivingCountry": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CountryResponse"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "transactionId": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "deliverViaName",
+                    "refNumber",
+                    "purpose",
+                    "receiverData",
+                    "senderData",
+                    "status",
+                    "fee",
+                    "rate",
+                    "reportData",
+                    "receivingCurrency",
+                    "sendingCurrency",
+                    "receivingAmount",
+                    "amount",
+                    "deliverVia",
+                    "transferType",
+                    "receivingCountry",
+                    "transactionId"
+                ],
+                "type": "object"
+            },
+            "TransactionReportResponse": {
+                "properties": {
+                    "count": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/TransactionResponse"
+                        },
+                        "type": "array",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "count",
+                    "items"
+                ],
+                "type": "object"
+            },
+            "CountryType": {
+                "properties": {
+                    "phoneCode": {
+                        "type": "string"
+                    },
+                    "ISOCode2": {
+                        "type": "string"
+                    },
+                    "ISOCode": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "phoneCode",
+                    "ISOCode2",
+                    "ISOCode",
+                    "currency",
+                    "name",
+                    "_id"
+                ],
+                "type": "object"
+            },
+            "ResponseGetReceivingCountries": {
+                "properties": {
+                    "countryList": {
+                        "items": {
+                            "$ref": "#/components/schemas/CountryType"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "countryList"
+                ],
+                "type": "object"
+            },
+            "ResponseGetTransferType": {
+                "properties": {
+                    "types": {
+                        "items": {
+                            "type": "number",
+                            "format": "double"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "types"
+                ],
+                "type": "object"
+            },
+            "CurrenciesType": {
+                "properties": {
+                    "receiving": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "sending": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "receiving",
+                    "sending"
+                ],
+                "type": "object"
+            },
+            "DeliverViaType": {
+                "properties": {
+                    "currencies": {
+                        "$ref": "#/components/schemas/CurrenciesType"
+                    },
+                    "shortCode": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "currencies",
+                    "shortCode",
+                    "name",
+                    "_id"
+                ],
+                "type": "object"
+            },
+            "ResponseGetDeliverVia": {
+                "properties": {
+                    "deliverVias": {
+                        "items": {
+                            "$ref": "#/components/schemas/DeliverViaType"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "deliverVias"
+                ],
+                "type": "object"
+            },
+            "ResponseCalculateAmount": {
+                "properties": {
+                    "amountToCollect": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "receivingAmount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "amountToCollect",
+                    "receivingAmount"
+                ],
+                "type": "object"
+            },
+            "RequestCalculateAmount": {
+                "properties": {
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "receivingCurrency": {
+                        "type": "string"
+                    },
+                    "sendingCurrency": {
+                        "type": "string"
+                    },
+                    "deliverVia": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "amount",
+                    "receivingCurrency",
+                    "sendingCurrency",
+                    "deliverVia"
+                ],
+                "type": "object"
+            },
+            "ResponseCreateTransaction": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "transaction": {
+                        "$ref": "#/components/schemas/TransactionResponse"
+                    }
+                },
+                "required": [
+                    "message",
+                    "transaction"
+                ],
+                "type": "object"
+            },
+            "RequestCreateTransaction": {
+                "properties": {
+                    "purpose": {
+                        "type": "string"
+                    },
+                    "bankInfo": {
+                        "$ref": "#/components/schemas/BankInfo"
+                    },
+                    "receiverId": {
+                        "type": "string"
+                    },
+                    "senderId": {
+                        "type": "string"
+                    },
+                    "fee": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "rate": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "receivingCurrency": {
+                        "type": "string"
+                    },
+                    "sendingCurrency": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "deliverVia": {
+                        "type": "string"
+                    },
+                    "transferType": {
+                        "type": "string"
+                    },
+                    "receivingCountryId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "purpose",
+                    "receiverId",
+                    "senderId",
+                    "fee",
+                    "rate",
+                    "receivingCurrency",
+                    "sendingCurrency",
+                    "amount",
+                    "deliverVia",
+                    "transferType",
+                    "receivingCountryId"
+                ],
+                "type": "object"
+            },
+            "UserType": {
+                "type": "string",
+                "enum": [
+                    "BACKOFFICE",
+                    "REGULAR"
+                ]
+            },
+            "Bank": {
+                "properties": {
+                    "partner": {
+                        "type": "boolean"
+                    },
+                    "country": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/CountryResponse"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "partner",
+                    "country",
+                    "name"
+                ],
+                "type": "object"
+            },
+            "DeliverViaItemResponse": {
+                "properties": {
+                    "transferType": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "transferType",
+                    "country",
+                    "name",
+                    "_id"
+                ],
+                "type": "object"
+            },
+            "TransactionChangeRequestType": {
+                "type": "string",
+                "enum": [
+                    "CHANGE_NAME",
+                    "CANCEL"
+                ]
+            },
+            "TransactionCrResponse": {
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "middleName": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "clerkId": {
+                        "type": "string"
+                    },
+                    "currentStatus": {
+                        "$ref": "#/components/schemas/TransactionStatus"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/TransactionChangeRequestType"
+                    },
+                    "transactionId": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "lastName",
+                    "firstName",
+                    "clerkId",
+                    "currentStatus",
+                    "type",
+                    "transactionId",
+                    "_id"
+                ],
+                "type": "object"
+            },
+            "TransactionCancelRequest": {
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    },
+                    "clerkId": {
+                        "type": "string"
+                    },
+                    "currentStatus": {
+                        "$ref": "#/components/schemas/TransactionStatus"
+                    },
+                    "transactionId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "comment",
+                    "transactionId"
+                ],
+                "type": "object"
+            },
+            "TransactionChangeNameRequest": {
+                "properties": {
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "middleName": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "clerkId": {
+                        "type": "string"
+                    },
+                    "currentStatus": {
+                        "$ref": "#/components/schemas/TransactionStatus"
+                    },
+                    "transactionId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "lastName",
+                    "firstName",
+                    "transactionId"
+                ],
+                "type": "object"
+            },
+            "AllowedStatusesResponse": {
+                "properties": {
+                    "statuses": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "statuses"
+                ],
+                "type": "object"
+            },
+            "RequestUpdateTransaction": {
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "comment",
+                    "status"
+                ],
+                "type": "object"
+            },
+            "Currency": {
+                "type": "string",
+                "enum": [
+                    "USD",
+                    "HKD",
+                    "PHP",
+                    "INR",
+                    "NPR",
+                    "IDR",
+                    "LKR",
+                    "VND",
+                    "KHR",
+                    "CNY",
+                    "PKR",
+                    "THB"
+                ]
+            },
+            "ComplianceCheckRequest": {
+                "properties": {
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "deliverVia": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "$ref": "#/components/schemas/Currency"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "receiverId": {
+                        "type": "string"
+                    },
+                    "senderId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "amount",
+                    "deliverVia",
+                    "currency",
+                    "country",
+                    "receiverId",
+                    "senderId"
+                ],
+                "type": "object"
+            },
+            "TransactionCountType": {
+                "type": "string",
+                "enum": [
+                    "ALL",
+                    "NOT_PROCESSED",
+                    "HOLD"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "jwt": {
+                "type": "jwt",
+                "name": "x-access-token",
+                "in": "headers"
+            },
+            "api": {
+                "type": "api",
+                "name": "x-access-token",
+                "in": "headers"
+            },
+            "api_jwt": {
+                "type": "api_jwt",
+                "name": "x-access-token",
+                "in": "headers"
+            }
+        }
+    },
+    "info": {
+        "title": "transactions-service",
+        "version": "0.1.0",
+        "contact": {}
+    },
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/transactions": {
+            "get": {
+                "operationId": "GetTransactions",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionReportResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "api_jwt": [
+                            "TRANSACTION_REPORTS"
+                        ]
+                    }
+                ],
+                "parameters": []
+            }
+        },
+        "/api/transactions/rate": {
+            "get": {
+                "operationId": "GetRate",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": []
+            }
+        },
+        "/api/transactions/fee": {
+            "get": {
+                "operationId": "GetFee",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": []
+            }
+        },
+        "/api/transactions/receivingCountries": {
+            "get": {
+                "operationId": "GetReceivingCountries",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetReceivingCountries"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": []
+            }
+        },
+        "/api/transactions/{countryId}/transferTypes": {
+            "get": {
+                "operationId": "GetTransactionTypesForCountry",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetTransferType"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "countryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/getDeliverVia": {
+            "get": {
+                "operationId": "GetDeliverVia",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetDeliverVia"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "countryId",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "transferType",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/deliver-via/{shortCode}": {
+            "get": {
+                "operationId": "GetDeliverViaByShortCode",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeliverVia"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "shortCode",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/calculateAmount": {
+            "post": {
+                "operationId": "CalculateAmount",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCalculateAmount"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestCalculateAmount"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/create": {
+            "post": {
+                "operationId": "CreateTransaction",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateTransaction"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": [
+                            "SEND_MONEY"
+                        ]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "user-id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "user-type",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/UserType"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "user-agent-id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "user-branch-id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestCreateTransaction"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/{countryId}/banks": {
+            "get": {
+                "operationId": "GetBanksByCountry",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Bank"
+                                    },
+                                    "type": "array",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "countryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/deliverVia/{deliverViaId}": {
+            "get": {
+                "operationId": "GetDeliverViaById",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/DeliverViaItemResponse"
+                                        }
+                                    ],
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deliverViaId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/cancel-request": {
+            "post": {
+                "operationId": "CreateTransactionCancelRequest",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionCrResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": [
+                            "SEND_MONEY"
+                        ]
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionCancelRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/change-name-request": {
+            "post": {
+                "operationId": "CreateTransactionChangeNameRequest",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionCrResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": [
+                            "SEND_MONEY"
+                        ]
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionChangeNameRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/allowed-statuses/{status}": {
+            "get": {
+                "operationId": "GetApplicableStatuses",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/AllowedStatusesResponse"
+                                        }
+                                    ],
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "status",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/{id}/update": {
+            "put": {
+                "operationId": "Update",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/TransactionResponse"
+                                        }
+                                    ],
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": [
+                            "SEND_MONEY"
+                        ]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "user-id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestUpdateTransaction"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/check-compliance": {
+            "post": {
+                "operationId": "CheckComplianceRules",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ComplianceCheckRequest"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transactions/update-status/{transactionId}/{status}": {
+            "put": {
+                "operationId": "UpdateStatus",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "transactionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "status",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/TransactionStatus"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/reports-count/{type}": {
+            "get": {
+                "operationId": "GetTransactionCount",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": [
+                            "TRANSACTION_REPORTS"
+                        ]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/TransactionCountType"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/transactions/country/{id}": {
+            "get": {
+                "operationId": "GetCountryById",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions": {
+            "get": {
+                "operationId": "GetTransactions",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionReportResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": []
+            }
+        },
+        "/api/internal/transactions/receivingCountries": {
+            "get": {
+                "operationId": "GetReceivingCountries",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetReceivingCountries"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": []
+            }
+        },
+        "/api/internal/transactions/getDeliverVia": {
+            "get": {
+                "operationId": "GetDeliverVia",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetDeliverVia"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "countryId",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "transferType",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/deliver-via/{shortCode}": {
+            "get": {
+                "operationId": "GetDeliverViaByShortCode",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeliverVia"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "shortCode",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/deliverVia/{deliverViaId}": {
+            "get": {
+                "operationId": "GetDeliverViaById",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/DeliverViaItemResponse"
+                                        }
+                                    ],
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deliverViaId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/check-phone-by-country/{country}/{phone}": {
+            "get": {
+                "operationId": "CheckPhoneByCountry",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "phone",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "country",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/country/{id}": {
+            "get": {
+                "operationId": "GetCountryById",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/update-status/{transactionId}/{status}": {
+            "put": {
+                "operationId": "UpdateStatus",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "transactionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "status",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/TransactionStatus"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/reports-count/{type}": {
+            "get": {
+                "operationId": "GetTransactionCount",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/TransactionCountType"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/internal/transactions/{id}/update/{userId}": {
+            "put": {
+                "operationId": "Update",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/TransactionResponse"
+                                        }
+                                    ],
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Transaction"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestUpdateTransaction"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ]
+}

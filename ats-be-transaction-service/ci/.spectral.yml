@@ -1,0 +1,348 @@
+
+rules:
+
+  # Standard Spectral rulesets
+  operation-2xx-response: error
+  path-params: error
+
+  # oas 2 standard rulesets
+  oas2-unused-definition: error
+  oas2-valid-example: error
+  oas2-schema: error
+
+  # OAS 2 and 3 custom rulesets
+  http-post-must-have-description:
+    description: All POST-Endpoints must have a description.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a description'
+    given: $.paths[*].post
+    severity: error
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  http-put-must-have-description:
+    description: All PUT-Endpoints must have a description.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a description'
+    given: $.paths[*].put
+    severity: error
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  http-patch-must-have-description:
+    description: All PATCH-Endpoints must have a description.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a description'
+    given: $.paths[*].patch
+    severity: error
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  http-get-must-have-description:
+    description: All GET-Endpoints must have a description.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a description'
+    given: $.paths[*].get
+    severity: error
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  http-delete-must-have-description:
+    description: All DELETE-Endpoints must have a description.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a description'
+    given: $.paths[*].delete
+    severity: error
+    recommended: true
+    then:
+      field: description
+      function: truthy
+  http-responses-must-have-description:
+    description: All Responses must have a description.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a description'
+    given: $.paths[*].delete
+    severity: error
+    recommended: true
+    then:
+      field: description
+      function: truthy
+
+  http-post-must-have-summary:
+    description: All POST-Endpoints must have a summary.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a summary'
+    given: $.paths[*].post
+    severity: error
+    recommended: true
+    then:
+      field: summary
+      function: truthy
+  http-put-must-have-summary:
+    description: All PUT-Endpoints must have a summary.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a summary'
+    given: $.paths[*].put
+    severity: error
+    recommended: true
+    then:
+      field: summary
+      function: truthy
+  http-patch-must-have-summary:
+    description: All PATCH-Endpoints must have a summary.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a summary'
+    given: $.paths[*].patch
+    severity: error
+    recommended: true
+    then:
+      field: summary
+      function: truthy
+  http-get-must-have-summary:
+    description: All GET-Endpoints must have a summary.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a summary'
+    given: $.paths[*].get
+    severity: error
+    recommended: true
+    then:
+      field: summary
+      function: truthy
+  http-delete-must-have-summary:
+    description: All DELETE-Endpoints must have a summary.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} must have a summary'
+    given: $.paths[*].delete
+    severity: error
+    recommended: true
+    then:
+      field: summary
+      function: truthy
+  http-paths-kebab-case:
+    description: All YAML/JSON paths MUST follow kebab-case
+    formats:
+      - oas3
+      - oas2
+    severity: warn
+    recommended: true
+    message: "{{property}} is not kebab-case: {{error}}"
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\/([a-z0-9]+(-[a-z0-9]+)*|({[^{}]+}))?(\/([a-z0-9]+(-[a-z0-9]+)*|{[^{}]+}))*$" # not closed braces is not allowed
+  http-query-params-camel-case:
+    description: queryParams should be camelCased.
+    formats:
+      - oas3
+      - oas2
+    message: '{{property}} is not in camelCase'
+    severity: warn
+    given: "$.paths.*.*.parameters.[?(@.in === \"query\")]"
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  http-path-parameters-camelCase-alphanumeric:
+    description: Path parameters MUST follow camelCase
+    severity: warn
+    recommended: true
+    message: "{{property}} path parameter is not camelCase: {{error}}"
+    given: $..parameters[?(@.in == 'path')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  # OAS 3 only rule sets
+
+  http-get-must-not-have-body:
+    description: All GET-Endpoints must not have a body.
+    formats: ["oas3"]
+    given: $.paths[*].get
+    severity: error
+    recommended: true
+    then:
+       field: requestBody
+       function: falsy
+  http-delete-must-not-have-body:
+    description: All DELETE-Endpoints must not have a body.
+    formats:
+      - oas3
+    given: $.paths[*].delete
+    severity: error
+    recommended: true
+    then:
+       field: requestBody
+       function: falsy
+  http-oas3-put-request-must-have-body:
+    description: All PUT-Endpoints must have a body.
+    formats:
+      - oas3
+    severity: error
+    given: $.paths[*].put
+    severity: error
+    recommended: true
+    then:
+       field: requestBody
+       function: truthy
+  http-oas3-post-request-must-have-body:
+    description: All POST-Endpoints must have a body.
+    formats:
+      - oas3
+    severity: error
+    given: $.paths[*].post
+    severity: error
+    recommended: true
+    then:
+       field: requestBody
+       function: truthy
+  http-oas3-patch-request-must-have-body:
+    description: All PATCH-Endpoints must have a body.
+    formats:
+      - oas3
+    severity: error
+    given: $.paths[*].patch
+    severity: error
+    recommended: true
+    then:
+       field: requestBody
+       function: truthy
+  securitySchemes-in-oas3-security-definitions-must-be-defined:
+    description: The security definitions must be present in oas3.
+    message: "SecuritySchemes not found in oas3 spec"
+    formats:
+      - oas3
+    given: $.components
+    severity: error
+    recommended: true
+    then:
+      field: securitySchemes
+      function: truthy
+  securitySchemes-in-oas3-security-definitions-must-have-ApiKeyAuth:
+    description: The security definitions, for ApiKeyAuth must be present in oas3.
+    message: "SecuritySchemes.ApiKeyAuth not found in oas3 spec"
+    formats:
+      - oas3
+    given: $.components[securitySchemes]
+    severity: error
+    recommended: true
+    then:
+      field: ApiKeyAuth
+      function: truthy
+  api-key-in-oas3-security-definitions-must-be-defined:
+    description: The security definitions for oas3 must contain x-api-key as a header spec.
+    message: "Name of the securityscheme in ApiKeyAuth Secuurity Scheme found: {{error}}, as defined in BFF"
+    formats:
+      - oas3
+    given: $.components[securitySchemes].[ApiKeyAuth]
+    severity: error
+    recommended: true
+    then:
+      field: name
+      function: enumeration
+      functionOptions:
+        values:
+          - "x-api-key"
+
+  # OAS 2 only rule-sets
+  http-oas2-get-request-must-not-have-body:
+    description: All GET-Endpoints must have a body.
+    formats:
+      - oas2
+    severity: error
+    given: $.paths..get.parameters..in
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - "path"
+          - "query"
+  http-oas2-delete-request-must-not-have-body:
+    description: All DELETE-Endpoints must have a body.
+    formats:
+      - oas2
+    severity: error
+    given: $.paths..delete.parameters..in
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - "path"
+          - "query"
+  http-oas2-put-request-must-have-body:
+    description: All PUT-Endpoints must have a body.
+    formats:
+      - oas2
+    severity: error
+    given: $.paths..put.parameters..in
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - "body"
+          - "path"
+          - "query"
+  http-oas2-post-request-must-have-body:
+    description: All POST-Endpoints must have a body.
+    formats:
+      - oas2
+    severity: error
+    given: $.paths..post.parameters..in
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - "body"
+          - "path"
+          - "query"
+  http-oas2-patch-request-must-have-body:
+    description: All PATCH-Endpoints must have a body.
+    formats:
+      - oas2
+    severity: error
+    given: $.paths..patch.parameters..in
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - "body"
+          - "path"
+          - "query"
+
+  api-key-in-oas2-security-definitions:
+    description: The security definitions must contain an api key field.
+    formats:
+      - oas2
+    given: $.securityDefinitions
+    severity: error
+    recommended: true
+    then:
+      field: apikey
+      function: truthy

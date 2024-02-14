@@ -1,0 +1,29 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "spec": {
+    "outputDirectory": "generated",
+    "specVersion": 3,
+    "securityDefinitions": {
+      "jwt": {
+        "type": "jwt",
+        "name": "x-access-token",
+        "in": "headers"
+      },
+      "api": {
+        "type": "api",
+        "name": "x-access-token",
+        "in": "headers"
+      },
+      "api_jwt": {
+        "type": "api_jwt",
+        "name": "x-access-token",
+        "in": "headers"
+      }
+    }
+  },
+  "routes": {
+    "authenticationModule": "auth.config.ts",
+    "routesDir": "generated"
+  }
+}
